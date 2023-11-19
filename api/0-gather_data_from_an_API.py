@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-""" Write a Python script that, using this 
-REST API, for a given employee ID, returns information about 
+""" Write a Python script that, using this
+REST API, for a given employee ID, returns information about
 his/her TODO list progress
 """
 
@@ -17,17 +17,18 @@ def employee_todo_progress(employee_id):
     todo_url = "https://jsonplaceholder.typicode.com/todos"
     employee_todo_url = requests.get(todo_url, params={"userId": employee_id})
     employee_todo = employee_todo_url.json()
-    
+
     TOTAL_NUMBER_OF_TASKS = len(employee_todo)
     NUMBER_OF_DONE_TASKS = sum(task["completed"] for task in employee_todo)
 
-    print(f"Employee {employee_name} is done with tasks" 
+    print(f"Employee {employee_name} is done with tasks"
           f"({NUMBER_OF_DONE_TASKS}/{TOTAL_NUMBER_OF_TASKS}) :")
     print(f"{employee_name}:", end=" ")
 
     for task in employee_todo:
-        if  task["completed"]:
+        if task["completed"]:
             print(f"\n\t{task['title']}")
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
