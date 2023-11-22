@@ -5,9 +5,10 @@ import requests
 import sys
 import json
 
+
 def export_user_data(user_id):
     url = "https://jsonplaceholder.typicode.com/"
-    
+
     # Fetch user details
     emp_user = requests.get(url + f"users/{user_id}").json()
     username = emp_user.get("username")
@@ -24,13 +25,14 @@ def export_user_data(user_id):
                         "task": task.get("title"),
                         "completed": task.get("completed"),
                         "username": username
-                    } 
+                    }
                     for task in emp_todos
                 ]
-            }, 
+            },
             f,
             indent=2
         )
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
