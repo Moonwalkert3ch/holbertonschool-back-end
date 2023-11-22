@@ -4,6 +4,7 @@
 import json
 import requests
 
+
 def export_todo_all_employees():
     url = "https://jsonplaceholder.typicode.com/"
     users = requests.get(url + "users").json()
@@ -15,13 +16,15 @@ def export_todo_all_employees():
                 "completed": task.get("completed"),
                 "username": user.get("username")
             }
-            for task in requests.get(url + "todos", params={"userId": user.get("id")}).json()
+            for task in requests.get(url + "todos", params={"userId": user
+                                                            .get("id")}).json()
         ]
         for user in users
     }
 
     with open("todo_all_employees.json", "w") as f:
         json.dump(todo, f)
+
 
 if __name__ == "__main__":
     export_todo_all_employees()
